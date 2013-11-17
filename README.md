@@ -1,4 +1,4 @@
-archlinux-openvpn
+archlinux-openvpn install guide
 =================
 
 setup openvpn on raspberry pi of arch linux
