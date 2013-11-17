@@ -1,0 +1,308 @@
+  * Download the latest Arch Linux ARM distribution from raspberrypi.org
+  * Install Arch Linux ARM to your SD card
+  * Sources:
+	http://raspberrypi-hacks.com/29/turn-your-raspberry-into-an-openvpn-vpn-server/
+	http://nyxbox.com/openvpn-on-raspberry-pi/
+	https://wiki.archlinux.org/index.php/OpenVPN_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+	https://wiki.archlinux.org/index.php/OpenVPN
+   # Change your password 
+    1  passwd
+   # Update your Arch Linux installation
+    2  pacman -Syu
+   11  reboot
+   # Install netctl if it is not exist
+   # https://wiki.archlinux.org/index.php/netctl
+   # https://wiki.archlinux.org/index.php/Netctl_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+   13  pacman -S netctl
+   14  ls /etc/netctl/examples/
+   15  vi /etc/netctl/examples/ethernet-static 
+   16  clear
+   17  ls /etc/netctl/
+   18  cp /etc/netctl/examples/ethernet-static /etc/netctl/default
+   19  ls /etc/netctl/
+   20  vi /etc/netctl/default 
+   21  cd /etc/netctl/
+   22  netctl start default 
+   23  systemctl status netctl@default.service
+   24  systemctl status netctl@default.service -l
+   25  vi /etc/netctl/default 
+   26  journalctl -xn
+   27  clear
+   28  netctl enable default 
+   29  systemctl
+   30  reboot
+   31  vi /etc/netctl/default 
+   32  vi /etc/netctl/default 
+   33  vi /etc/netctl/default 
+   34  netctl enable default 
+   35  netctl reenable default 
+   36  systemctl disable dhcpcd@eth0
+   37  reboot
+   38  pacman -S openvpn
+   39  ls /etc/
+   40  ls /etc/modules-load.d/
+   41  vi /etc/modules-load.d/raspberrypi.conf 
+   42  vi /etc/modules-load.d/tun.conf
+   43  cp -r /usr/share/openvpn/easy-rsa /root/OpenVPN
+   44  whereis openvpn
+   45  ls /usr/share/openvpn/
+   46  ls /usr/share/openvpn/contrib/
+   47  ls /usr/share/openvpn/examples/
+   48  ls /usr/share/openvpn/examples/README 
+   49  vi /usr/share/openvpn/examples/README 
+   50  ls /etc/openvpn/
+   51  ls /usr/share/openvpn/examples/
+   52  vi /etc/netctl/default 
+   53  cd /etc/netctl/
+   54  ls
+   55  netctl reenable default 
+   56  reboot
+   57  cd /etc/modules-load.d/
+   58  ls
+   59  ls -l
+   60  rm tun.conf 
+   61  ls
+   62  ls /etc/netctl/examples/
+   63  ifconfig
+   64  cd /etc
+   65  ls
+   66  ls /etc/netctl/examples/
+   67  cp /etc/netctl/examples/tuntap /etc/netctl/
+   68  ls /etc/netctl/
+   69  vi /etc/netctl/tuntap 
+   70  cd netctl/
+   71  ls
+   72  netctl start tuntap 
+   73  netctl enable tuntap 
+   74  reboot
+   75  ifconfig
+   76  ls /usr/share/openvpn/
+   77  pacman -S openvpn
+   78  whereis easy-rsa
+   79  cp -r /usr/share/openvpn/easy-rsa ~/OpenVPN
+   80  pacman -S openvpn
+   81  ls /usr/share/openvpn/
+   82  ls /usr/share/openvpn/contrib/
+   83  ls /usr/share/openvpn/examples/
+   84  cp -r /usr/share/openvpn/easy-rsa /etc/openvpn
+   85  pwd
+   86  ls
+   87  ls
+   88  wget https://github.com/OpenVPN/easy-rsa/archive/master.zip
+   89  ls
+   90  unzip master.zip 
+   91  ls
+   92  rm master.zip 
+   93  ls
+   94  git
+   95  pacman -S git
+   96  git
+   97  git config --global user.name "Yvan"
+   98  git config --global user.email "yvan@gmail.com"
+   99  git clone https://github.com/OpenVPN/easy-rsa.git
+  100  ls
+  101  cd easy-rsa/
+  102  ls
+  103  cd easy-rsa/
+  104  ls
+  105  cd 2.0/
+  106  ls
+  107  ls
+  108  cd ..
+  109  ls
+  110  cp -r ./2.0/ /etc/openvpn/
+  111  cd /etc/openvpn/
+  112  ls
+  113  pwd
+  114  ls
+  115  mv 2.0/ easy-rsa
+  116  ls
+  117  cd easy-rsa/
+  118  ls
+  119  source ./vars 
+  120  ./clean-all 
+  121  ./build-ca
+  122  ./build-key-server keyserver
+  123  ./build-dh
+  124  ./build-key client1
+  125  ./build-key client2
+  126  ls
+  127  pwd
+  128  cd keys/
+  129  ls
+  130  cp /usr/share/openvpn/examples/server.conf /etc/openvpn/openvpn.conf
+  131  vi /etc/openvpn/openvpn.conf 
+  132  vi /etc/openvpn/openvpn.conf 
+  133  ifconfig
+  134  vi /etc/openvpn/openvpn.conf 
+  135  echo 1 > /proc/sys/net/ipv4/ip_forward
+  136  iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+  137  vi /etc/conf.d/iptables
+  138  cd /etc
+  139  ls
+  140  ls sysctl.d/
+  141  whereis iptables
+  142  ls /etc/iptables/
+  143  ls /usr/bin/iptables
+  144  ls /usr/bin/iptables/
+  145  vi /usr/bin/iptables
+  146  vi /etc/rc.d/iptables
+  147  /etc/rc.d
+  148  whereis iptables
+  149  vi /etc/iptables
+  150  ls /etc/iptables/
+  151  vi /etc/iptables/simple_firewall.rules 
+  152  vi /etc/iptables/empty.rules 
+  153  vi /etc/conf.d/iptables
+  154  ls /etc/rc.d
+  155  pacman -S iptables
+  156  iptables -L -t nat
+  157  whereis sysctl.conf
+  158  whereis iptables
+  159  vi /usr/bin/iptables
+  160  ls /usr/bin/iptables
+  161  ls /usr/bin/iptables/
+  162  whereis sysctl
+  163  whereis sysctl.conf
+  164  ls /etc/sysctl.d
+  165  ls /etc/sysctl.d/raspberrypi.conf 
+  166  vi /etc/sysctl.d/raspberrypi.conf 
+  167  ls /usr/lib/sysctl.d/
+  168  vi /usr/lib/sysctl.d/50-default.conf 
+  169  ifconfig
+  170  sysctl net.ipv4.ip_forward=1
+  171  ls /usr/lib/sysctl.d/
+  172  whereis ipforward
+  173  exit
+  174  cd /etc/sysctl.d/
+  175  ls
+  # https://wiki.archlinux.org/index.php/Internet_Sharing
+  176  sysctl net.ipv4.ip_forward=1
+  177  iptables-save > /etc/iptables/iptables.rules
+  178  vi /etc/iptables/iptables.rules 
+  179  date
+  180  cd ..
+  181  ls
+  182  cd openvpn/
+  183  ls
+  184  cd easy-rsa/
+  185  ls
+  186  cd ..
+  187  ls
+  188  vi clientside.conf
+  189  whereis openvpn
+  190  cd /usr/share/openvpn
+  191  ls
+  192  cd examples/
+  193  ls
+  194  vi client.conf 
+  195  cd ..
+  196  cd ..
+  197  cd /etc/openvpn/
+  198  ls
+  199  cp /usr/share/openvpn/examples/client.conf /etc/openvpn/
+  200  ls
+  201  mv client.conf clientside.conf
+  202  ls
+  203  vi clientside.conf 
+  204  modprobe tun
+  205  ifconfig
+  206  cd /usr/share/openvpn/
+  207  ls
+  208  pacman -S openresolv
+  209  whereis openvpn
+  210  cd /usr/share/openvpn/
+  211  ls
+  212  cd examples/
+  213  ls
+  214  vi /etc/resolv.conf 
+  215  vi /usr/share/openvpn/update-resolv-conf
+  216  chmod +x /usr/share/openvpn/update-resolv-conf
+  217  cd /etc/openvpn/
+  218  ls
+  219  vi clientside.conf 
+  220  /etc/rc.d/openvpn start
+  221  systemctl start openvpn
+  222  systemctl enable openvpn@openvpn.service
+  223  systemctl start openvpn@openvpn.service
+  224  systemctl status openvpn@openvpn.service
+  225  systemctl status openvpn@openvpn.service -l
+  226  ls
+  227  cd easy-rsa/
+  228  cd keys
+  229  ls
+  230  mv /etc/openvpn/clientside.conf 
+  231  mv /etc/openvpn/clientside.conf /etc/openvpn/easy-rsa/keys/clientside.conf
+  232  cd ..
+  233  cd .
+  234  cd ..
+  235  ls
+  236  reboot
+  237  systemctl start openvpn@openvpn.service
+  238  systemctl enable openvpn@openvpn.service
+  239  systemctl reenable openvpn@openvpn.service
+  240  systemctl start openvpn@openvpn.service
+  241  cd /usr/bin
+  242  ls
+  243  vi ip
+  244  systemctl start openvpn@openvpn.service
+  245  systemctl start openvpn
+  246  cd /etc/webmin
+  247  where webmin.acl
+  248  pacman -S webmin
+  249  systemctl start openvpn
+  250  systemctl start openvpn@openvpn.service
+  251  journalctl -xn
+  252  systemctl start openvpn@openvpn.service
+  253  systemctl status openvpn@openvpn.service
+  254  Process: 398 ExecStart=/usr/bin/openvpn --cd /etc/openvpn --config /etc/openvpn/%i.conf --daemon openvpn@%i (code=exited, status=1/FAILURE):q
+  255  cd /etc
+  256  ls
+  257  systemctl restart openvpn@openvpn.service
+  258  ls
+  259  cd openvpn/
+  260  ls
+  261  openvpn /etc/openvpn/openvpn.conf 
+  262  systemctl enable openvpn@openvpn.service
+  263  systemctl start openvpn@openvpn.service
+  264  reboot
+  265  systemctl status openvpn@openvpn.service
+  266  systemctl status openvpn@openvpn.service -l
+  267  systemctl start openvpn@openvpn.service
+  268  journalctl -xn
+  269  cd /etc/openvpn/
+  270  ls
+  271  vi openvpn.conf 
+  272  vi openvpn.conf 
+  273  systemctl start openvpn@openvpn.service
+  274  systemctl reenable openvpn@openvpn.service
+  275  systemctl start openvpn@openvpn.service
+  276  cd /usr/bin
+  277  ln -s /usr/sbin/ip ip
+  278  ls
+  279  vi ip
+  280  cd /usr/sbin
+  281  ls
+  282  vi ip
+  283  cd /etc/openvpn/
+  284  ls
+  285  vi openvpn.conf 
+  286  vi openvpn.conf 
+  287  systemctl reenable openvpn@openvpn.service
+  288  systemctl start openvpn@openvpn.service
+  289  reboot
+  290  cd /etc/openvpn/
+  291  ls
+  292  vi openvpn.conf 
+  293  vi openvpn.conf 
+  294  systemctl start openvpn@openvpn.service
+  295  systemctl status openvpn@openvpn.service
+  296  vi openvpn.conf 
+  297  cd easy-rsa/
+  298  cd keys
+  299  ls
+  300  vi clientside.conf 
+  301  history
+  302  cd ~
+  303* 
+  304  history > history-command.txt
