@@ -27,42 +27,18 @@
    24  systemctl status netctl@default.service -l
    25  vi /etc/netctl/default 
    26  journalctl -xn
-   27  clear
    28  netctl enable default 
-   29  systemctl
    30  reboot
-   31  vi /etc/netctl/default 
-   32  vi /etc/netctl/default 
    33  vi /etc/netctl/default 
    34  netctl enable default 
    35  netctl reenable default 
    36  systemctl disable dhcpcd@eth0
    37  reboot
    38  pacman -S openvpn
-   39  ls /etc/
-   40  ls /etc/modules-load.d/
-   41  vi /etc/modules-load.d/raspberrypi.conf 
-   42  vi /etc/modules-load.d/tun.conf
-   43  cp -r /usr/share/openvpn/easy-rsa /root/OpenVPN
-   44  whereis openvpn
-   45  ls /usr/share/openvpn/
-   46  ls /usr/share/openvpn/contrib/
-   47  ls /usr/share/openvpn/examples/
-   48  ls /usr/share/openvpn/examples/README 
-   49  vi /usr/share/openvpn/examples/README 
-   50  ls /etc/openvpn/
-   51  ls /usr/share/openvpn/examples/
-   52  vi /etc/netctl/default 
    53  cd /etc/netctl/
    54  ls
    55  netctl reenable default 
    56  reboot
-   57  cd /etc/modules-load.d/
-   58  ls
-   59  ls -l
-   60  rm tun.conf 
-   61  ls
-   62  ls /etc/netctl/examples/
    63  ifconfig
    64  cd /etc
    65  ls
@@ -78,35 +54,14 @@
    75  ifconfig
    76  ls /usr/share/openvpn/
    77  pacman -S openvpn
-   78  whereis easy-rsa
-   79  cp -r /usr/share/openvpn/easy-rsa ~/OpenVPN
-   80  pacman -S openvpn
-   81  ls /usr/share/openvpn/
-   82  ls /usr/share/openvpn/contrib/
-   83  ls /usr/share/openvpn/examples/
-   84  cp -r /usr/share/openvpn/easy-rsa /etc/openvpn
-   85  pwd
-   86  ls
-   87  ls
-   88  wget https://github.com/OpenVPN/easy-rsa/archive/master.zip
-   89  ls
-   90  unzip master.zip 
-   91  ls
-   92  rm master.zip 
-   93  ls
-   94  git
-   95  pacman -S git
-   96  git
-   97  git config --global user.name "Yvan"
-   98  git config --global user.email "yvan@gmail.com"
+   # http://openvpn.net/index.php/open-source/downloads.html
+   # Easy-rsa
+     Starting with openvpn-2.3_alpha2 easy-rsa is no longer part of the OpenVPN source or binary packages. It can be downloaded separately from it's GitHub project page.
    99  git clone https://github.com/OpenVPN/easy-rsa.git
-  100  ls
-  101  cd easy-rsa/
   102  ls
   103  cd easy-rsa/
   104  ls
   105  cd 2.0/
-  106  ls
   107  ls
   108  cd ..
   109  ls
@@ -131,7 +86,6 @@
   128  cd keys/
   129  ls
   130  cp /usr/share/openvpn/examples/server.conf /etc/openvpn/openvpn.conf
-  131  vi /etc/openvpn/openvpn.conf 
   132  vi /etc/openvpn/openvpn.conf 
   133  ifconfig
   134  vi /etc/openvpn/openvpn.conf 
